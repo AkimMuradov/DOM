@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        #studentList {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            min-height: 100px;
+            margin-top: 10px;
+        }
+
+        .student {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px ;
+        }
+
+        .active {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tələbə Siyahısı</h1>
+    
+    <input type="text" id="studentName" placeholder="Tələbənin adını yazın">
+    <br><br>
+    
+    <button onclick="addStudent()">Əlavə et</button>
+    <button onclick="addStudentFirst()">Əvvələ əlavə et</button>
+    <br><br>
+    
+    <button onclick="removeClass()">Class sil</button>
+    <button onclick="addClassAll()">Class all</button>
+    <br><br>
+    
+    <button onclick="addClass()">Class əlavə et</button>
+    <br><br>
+    
+    <div id="studentList"></div>
+
+    <script>
+        const studentNameInput = document.getElementById("studentName");
+        const studentList = document.getElementById("studentList");
+
+        function addStudent() {
+            const value = studentNameInput.value.trim();
+            if (value !== "") {
+                const p = document.createElement("p");
+                p.className = "student";
+                p.setAttribute("title", value);
+                p.textContent = value;
+                studentList.appendChild(p);
+                studentNameInput.value = "";
+            }
+        }
+
+    
+        function addStudentFirst() {
+            const value = studentNameInput.value.trim();
+            if (value !== "") {
+                const p = document.createElement("p");
+                p.className = "student";
+                p.setAttribute("title", value);
+                p.textContent = value;
+                studentList.prepend(p);
+                studentNameInput.value = "";
+            }
+        }
+        function addClass() {
+            const firstStudent = studentList.querySelector(".student");
+            if (firstStudent) {
+                firstStudent.classList.add("active");
+            }
+        }
+
+        function removeClass() {
+            const firstStudent = studentList.querySelector(".student");
+            if (firstStudent) {
+                firstStudent.classList.remove("active");
+            }
+        }
+
+        function addClassAll() {
+            const students = studentList.querySelectorAll(".student");
+            students.forEach(student => {
+                student.classList.add("active");
+            });
+        }
+    </script>
+
+</body>
+</html>
